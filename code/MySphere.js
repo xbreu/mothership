@@ -66,7 +66,7 @@ class MySphere extends CGFobject {
 
                 //--- Texture Coordinates
                 let s = theta / (2 * Math.PI);
-                let t = (phi) / (Math.PI);
+                let t = phi / (Math.PI);
                 this.texCoords.push(s, t);
 
             }
