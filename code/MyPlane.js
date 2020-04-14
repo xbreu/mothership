@@ -56,6 +56,7 @@ class MyPlane extends CGFobject {
         this.primitiveType = this.scene.gl.TRIANGLE_STRIP;
         this.initGLBuffers();
     }
+
     // Drawing the plane
     /*
     To draw the plane we need to draw the row we defined, nDivs times.
@@ -72,9 +73,9 @@ class MyPlane extends CGFobject {
         this.scene.popMatrix();
     }
 
-    updateBuffers(complexity){
-        this.nDivs = 1 +  Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 1-10
-        this.patchLength = 1.0 / this. nDivs;
+    updateBuffers(complexity) {
+        this.nDivs = 1 + Math.round(9 * complexity); //complexity varies 0-1, so nDivs varies 1-10
+        this.patchLength = 1.0 / this.nDivs;
 
         // reinitialize buffers
         this.initBuffers();
