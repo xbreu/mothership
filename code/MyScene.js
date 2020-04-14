@@ -88,12 +88,12 @@ class MyScene extends CGFscene {
 
         //This sphere does not have defined texture coordinates
 
+        if (this.displayCylinder)
+            this.cylinder.display();
         if (this.displaySphere) {
             this.earthTexture.apply();
             this.incompleteSphere.display();
         }
-        if(this.displayCylinder)
-            this.cylinder.display();
 
         // ---- END Primitive drawing section
     }
