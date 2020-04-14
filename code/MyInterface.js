@@ -1,7 +1,7 @@
 /**
-* MyInterface
-* @constructor
-*/
+ * MyInterface
+ * @constructor
+ */
 class MyInterface extends CGFinterface {
     constructor() {
         super();
@@ -13,7 +13,7 @@ class MyInterface extends CGFinterface {
         // init GUI. For more information on the methods, check:
         // http://workshop.chromeexperiments.com/examples/gui
         this.gui = new dat.GUI();
-        
+
         var obj = this;
 
         //Checkbox element in GUI
