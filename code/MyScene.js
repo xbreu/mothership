@@ -43,6 +43,7 @@ class MyScene extends CGFscene
 
         //Objects connected to MyInterface
         this.displayAxis = true;
+        this.displayCylinder = true;
         this.displaySphere = false;
     }
 
@@ -100,8 +101,8 @@ class MyScene extends CGFscene
             this.earthTexture.apply();
             this.incompleteSphere.display();
         }
-
-        this.cylinder.display();
+        if(this.displayCylinder)
+            this.cylinder.display();
 
         // ---- END Primitive drawing section
     }
