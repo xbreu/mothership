@@ -92,7 +92,10 @@ class MyScene extends CGFscene {
         //This sphere does not have defined texture coordinates
 
         if (this.displayCylinder)
+        {
+            this.earthTexture.apply();
             this.cylinder.display();
+        }
         if (this.displaySphere) {
             this.earthTexture.apply();
             this.incompleteSphere.display();
