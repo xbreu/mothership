@@ -24,6 +24,7 @@ class MyCylinder extends CGFobject {
             this.indices.push(i * 2, (i * 2 + 1) % (this.slices * 2), (i * 2 + 2) % (this.slices * 2));
             this.indices.push((i * 2 + 3) % (this.slices * 2), (i * 2 + 2) % (this.slices * 2), (i * 2 + 1) % (this.slices * 2));
             this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
+            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
             ang += alphaAng;
         }
 
