@@ -22,8 +22,8 @@ class MyCylinder extends CGFobject {
             this.vertices.push(Math.cos(ang), 0.5, -Math.sin(ang));
             this.vertices.push(Math.cos(ang), -0.5, -Math.sin(ang));
             if (i !== this.slices) {
-                this.indices.push(i * 2, (i * 2 + 1), (i * 2 + 2));
-                this.indices.push((i * 2 + 3), (i * 2 + 2), (i * 2 + 1));
+                this.indices.push(i * 2, i * 2 + 1, i * 2 + 2);
+                this.indices.push(i * 2 + 3, i * 2 + 2, i * 2 + 1);
             }
             this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
             this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
