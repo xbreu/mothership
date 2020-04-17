@@ -42,6 +42,7 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayCylinder = true;
         this.displaySphere = false;
+        this.displayNormals = false;
     }
 
     initLights() {
@@ -94,6 +95,8 @@ class MyScene extends CGFscene {
             this.earthTexture.apply();
             this.incompleteSphere.display();
         }
+        if (this.displayNormals)
+            this.cylinder.enableNormalViz();
 
         // ---- END Primitive drawing section
     }
