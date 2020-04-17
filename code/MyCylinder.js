@@ -12,6 +12,7 @@ class MyCylinder extends CGFobject {
     initBuffers() {
         this.vertices = [];
         this.indices = [];
+        this.normals = [];
 
         var ang = 0;
         var alphaAng = 2 * Math.PI / this.slices;
@@ -22,12 +23,9 @@ class MyCylinder extends CGFobject {
             this.vertices.push(Math.cos(ang), -0.5, -Math.sin(ang));
             this.indices.push(i * 2, (i * 2 + 1) % (this.slices * 2), (i * 2 + 2) % (this.slices * 2));
             this.indices.push((i * 2 + 3) % (this.slices * 2), (i * 2 + 2) % (this.slices * 2), (i * 2 + 1) % (this.slices * 2));
+            this.normals.push(Math.cos(ang), 0, -Math.sin(ang));
             ang += alphaAng;
         }
-
-        console.log(this.vertices);
-
-        console.log(this.indices);
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
