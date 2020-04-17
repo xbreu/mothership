@@ -28,6 +28,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 30, 0);
+        this.cubemap = new MyUnitCubeQuad(this);
 
         //Initialize textures
         this.earthTexture = new CGFappearance(this);
@@ -42,6 +43,7 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayCylinder = true;
         this.displaySphere = false;
+        this.nightMode = false;
     }
 
     initLights() {
@@ -94,7 +96,9 @@ class MyScene extends CGFscene {
             this.earthTexture.apply();
             this.incompleteSphere.display();
         }
-
+        this.cubemap.setNightMode(this.nightMode);
+        this.scale(50, 50, 50);
+        this.cubemap.display();
         // ---- END Primitive drawing section
     }
 }
