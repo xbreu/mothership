@@ -73,10 +73,27 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyW")) {
             text += " W ";
             keysPressed = true;
+            this.vehicle.accelerate(0.01);
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text += " S ";
             keysPressed = true;
+            this.vehicle.accelerate(-0.01);
+        }
+        if (this.gui.isKeyPressed("KeyA")) {
+            text += " W ";
+            keysPressed = true;
+            this.vehicle.turn(0.1);
+        }
+        if (this.gui.isKeyPressed("KeyD")) {
+            text += " S ";
+            keysPressed = true;
+            this.vehicle.turn(-0.1);
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            text += " S ";
+            keysPressed = true;
+            this.vehicle.reset();
         }
         if (keysPressed)
             console.log(text);
@@ -85,6 +102,7 @@ class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t) {
         this.checkKeys();
+        this.vehicle.update();
     }
 
     display() {
