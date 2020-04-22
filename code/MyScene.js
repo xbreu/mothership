@@ -28,8 +28,8 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 10, 0);
-        this.vehicle = new MyVehicle(this);
         this.cubemap = new MyUnitCubeQuad(this);
+        this.vehicle = new MyVehicle(this);
 
         //Initialize textures
         this.earthTexture = new CGFappearance(this);
@@ -42,7 +42,7 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayCylinder = false;
+        this.displayCylinder = true;
         this.displaySphere = false;
         this.displayNormals = false;
         this.nightMode = false;
@@ -108,6 +108,8 @@ class MyScene extends CGFscene {
 
         //This sphere does not have defined texture coordinates
 
+        this.vehicle.display();
+
         if (this.displayCylinder) {
             this.earthTexture.apply();
             this.cylinder.display();
@@ -118,8 +120,6 @@ class MyScene extends CGFscene {
         }
         if (this.displayNormals)
             this.cylinder.enableNormalViz();
-
-        this.vehicle.display();
 
         this.cubemap.setNightMode(this.nightMode);
         this.scale(50, 50, 50);
