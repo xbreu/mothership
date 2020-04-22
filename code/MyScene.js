@@ -28,6 +28,7 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
         this.incompleteSphere = new MySphere(this, 16, 8);
         this.cylinder = new MyCylinder(this, 10, 0);
+        this.vehicle = new MyVehicle(this);
         this.cubemap = new MyUnitCubeQuad(this);
 
         //Initialize textures
@@ -41,7 +42,7 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.displayAxis = true;
-        this.displayCylinder = true;
+        this.displayCylinder = false;
         this.displaySphere = false;
         this.displayNormals = false;
         this.nightMode = false;
@@ -102,6 +103,8 @@ class MyScene extends CGFscene {
         }
         if (this.displayNormals)
             this.cylinder.enableNormalViz();
+
+        this.vehicle.display();
 
         this.cubemap.setNightMode(this.nightMode);
         this.scale(50, 50, 50);
