@@ -48,7 +48,10 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayCylinder').name('Display Cylinder');
         this.gui.add(this.scene, 'displayNormals').name('Display Normals');
         this.gui.add(this.scene, 'nightMode').name('Night Mode');
-
+        this.gui.add(this.scene, 'selectedMapTexture', this.scene.textureIds).name('Selected Map Texture').onChange(this.scene.updateMapTexture.bind(this.scene));
+        this.gui.add(this.scene, 'speedFactor',1,20);//.onChange(this.scene.onSpeedFactorChanged.bind(this.scene));
+        
+        
         this.initKeys();
         return true;
     }

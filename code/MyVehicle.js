@@ -19,9 +19,9 @@ class MyVehicle extends CGFobject {
         this.speed = 0;
     }
 
-    update() {
-        this.z += Math.cos(this.rotation) * this.speed;
-        this.x += Math.sin(this.rotation) * this.speed;
+    update(factor) {
+        this.z += Math.cos(this.rotation) * this.speed * factor;
+        this.x += Math.sin(this.rotation) * this.speed * factor;
     }
 
     turn(val) {

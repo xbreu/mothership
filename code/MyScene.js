@@ -46,6 +46,10 @@ class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayNormals = false;
         this.nightMode = false;
+
+        this.selectedMapTexture = 0;
+        this.textureIds = {'Day': 0, 'Night': 1};
+        this.speedFactor = 1;
     }
 
     initLights() {
@@ -64,6 +68,12 @@ class MyScene extends CGFscene {
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
+    }
+
+    updateMapTexture()
+    {
+        console.log(this.selectedMapTexture);
+        this.cubemap.setNightMode(this.selectedMapTexture == 1);
     }
 
     checkKeys() {
@@ -102,7 +112,7 @@ class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t) {
         this.checkKeys();
-        this.vehicle.update();
+        this.vehicle.update(this.speedFactor);
     }
 
     display() {
@@ -139,7 +149,6 @@ class MyScene extends CGFscene {
         if (this.displayNormals)
             this.cylinder.enableNormalViz();
 
-        this.cubemap.setNightMode(this.nightMode);
         this.scale(50, 50, 50);
         this.cubemap.display();
         // ---- END Primitive drawing section
