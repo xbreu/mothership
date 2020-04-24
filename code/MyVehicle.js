@@ -21,6 +21,17 @@ class MyVehicle extends CGFobject {
         this.speed = 0;
     }
 
+    initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
+        let texture = new CGFappearance(this.scene);
+        texture.setAmbient(10.0, 10.0, 10.0, 1);
+        texture.setDiffuse(0.0, 0.0, 0.0, 1);
+        texture.setSpecular(0.0, 0.0, 0.0, 1);
+        texture.setShininess(1.0);
+        texture.loadTexture('images/' + image + '.png');
+        texture.setTextureWrap(wrap1, wrap2);
+        return texture;
+    }
+
     update(factor) {
         this.z += Math.cos(this.rotation) * this.speed * factor;
         this.x += Math.sin(this.rotation) * this.speed * factor;
@@ -41,7 +52,7 @@ class MyVehicle extends CGFobject {
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.rotation, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
-        this.scene.scale(0.5*scale, 1*scale, 0.5*scale);
+        this.scene.scale(0.5 * scale, 1 * scale, 0.5 * scale);
         this.texture.apply();
         this.balloon.display();
         this.scene.popMatrix();
