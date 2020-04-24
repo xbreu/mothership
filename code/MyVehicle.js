@@ -10,6 +10,7 @@ class MyVehicle extends CGFobject {
         this.reset();
         this.pyramid = new MyPyramid(scene, 4, 1);
         this.balloon = new MySphere(scene, 16, 8);
+        this.texture = this.initTexture("zeppelin");
     }
 
     reset() {
@@ -41,6 +42,7 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(this.rotation, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.5*scale, 1*scale, 0.5*scale);
+        this.texture.apply();
         this.balloon.display();
         this.scene.popMatrix();
     }
