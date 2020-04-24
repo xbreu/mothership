@@ -64,11 +64,19 @@ class MyVehicle extends CGFobject {
     display(scale) {
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
+        this.scene.rotate(-3 * Math.PI / 8, 0, 0, 1);
         this.scene.rotate(this.rotation, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.5 * scale, 1 * scale, 0.5 * scale);
         this.texture.apply();
         this.balloon.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(this.x, this.y, this.z);
+        this.scene.rotate(this.rotation, 0, 1, 0);
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.scene.scale(0.5 * scale, 1 * scale, 0.5 * scale);
         this.scene.translate(0, 0.1, 0.8);
         this.scene.scale(0.5, 0.4, 0.4);
         this.black.apply();
