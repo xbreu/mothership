@@ -34,12 +34,12 @@ class MyVehicle extends CGFobject {
             this.speed = 0;
     }
 
-    display() {
+    display(scale) {
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.rotation, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
-        this.scene.scale(0.5, 1, 0.5);
+        this.scene.scale(0.5*scale, 1*scale, 0.5*scale);
         this.pyramid.display();
         this.scene.popMatrix();
     }

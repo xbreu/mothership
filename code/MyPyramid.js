@@ -64,7 +64,7 @@ class MyPyramid extends CGFobject {
         this.normals.push(0, -0.5, 0);
 
         for (let i = 0; i < this.slices; i++)
-            this.indices.push(3 * i + 1, 12, 3 * i + 2);
+            this.indices.push(3 * i + 1, this.vertices.length/3-1, 3 * i + 2);
 
 
         this.primitiveType = this.scene.gl.TRIANGLES;

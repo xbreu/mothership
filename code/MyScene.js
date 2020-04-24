@@ -50,6 +50,7 @@ class MyScene extends CGFscene {
         this.selectedMapTexture = 0;
         this.textureIds = {'Day': 0, 'Night': 1};
         this.speedFactor = 1;
+        this.scaleFactor = 1;
     }
 
     initLights() {
@@ -136,7 +137,7 @@ class MyScene extends CGFscene {
 
         //This sphere does not have defined texture coordinates
 
-        this.vehicle.display();
+        this.vehicle.display(this.scaleFactor);
 
         if (this.displayCylinder) {
             this.earthTexture.apply();
