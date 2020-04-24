@@ -12,7 +12,7 @@ class MyVehicle extends CGFobject {
         this.balloon = new MySphere(scene, 16, 8);
         this.board = new MyCylinder(scene, 6);
         this.texture = this.initTexture("zeppelin");
-        this.black = this.initColor(0, 0, 0);
+        this.black = this.initColor(33, 17, 19);
     }
 
     reset() {
@@ -39,10 +39,10 @@ class MyVehicle extends CGFobject {
         g /= 255;
         b /= 255;
         let aux = new CGFappearance(this.scene);
-        aux.setAmbient(r, g, b, 1.0);
-        aux.setDiffuse(0, 0, 0, 1.0);
-        aux.setSpecular(1.0, 1.0, 1.0, 1.0);
-        aux.setShininess(10.0);
+        aux.setAmbient(5 * r, 5 * g, 5 * b, 1.0);
+        aux.setDiffuse(0.0, 0.0, 0.0, 1);
+        aux.setSpecular(0.0, 0.0, 0.0, 1);
+        aux.setShininess(1.0);
         return aux;
     }
 
