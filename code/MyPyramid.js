@@ -19,7 +19,7 @@ class MyPyramid extends CGFobject {
         var alphaAng = 2 * Math.PI / this.slices;
 
 
-        for (var i = 0; i < this.slices; i++) {
+        for (let i = 0; i < this.slices; i++) {
             // All vertices have to be declared for a given face
             // even if they are shared with others, as the normals 
             // in each face will be different
@@ -60,12 +60,11 @@ class MyPyramid extends CGFobject {
             ang += alphaAng;
         }
 
-        this.vertices.push(0,-0.5,0);
+        /*this.vertices.push(0, -0.5, 0);
 
-        for(var i = 0; i < this.slices; i++)
-        {
-            this.indices.push(3*i+1,this.vertices.length-1,3*i+2);
-        }
+        for (let i = 0; i < this.slices; i++) {
+            this.indices.push(3 * i + 1, this.vertices.length - 1, 3 * i + 2);
+        }*/
 
 
         this.primitiveType = this.scene.gl.TRIANGLES;
