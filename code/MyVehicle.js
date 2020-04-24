@@ -10,7 +10,9 @@ class MyVehicle extends CGFobject {
         this.reset();
         this.pyramid = new MyPyramid(scene, 4, 1);
         this.balloon = new MySphere(scene, 16, 8);
+        this.board = new MyCylinder(scene, 6);
         this.texture = this.initTexture("zeppelin");
+        this.black = this.initColor(0, 0, 0);
     }
 
     reset() {
@@ -30,6 +32,18 @@ class MyVehicle extends CGFobject {
         texture.loadTexture('images/' + image + '.png');
         texture.setTextureWrap(wrap1, wrap2);
         return texture;
+    }
+
+    initColor(r, g, b) {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        let aux = new CGFappearance(this.scene);
+        aux.setAmbient(r, g, b, 1.0);
+        aux.setDiffuse(0, 0, 0, 1.0);
+        aux.setSpecular(1.0, 1.0, 1.0, 1.0);
+        aux.setShininess(10.0);
+        return aux;
     }
 
     update(factor) {
@@ -53,8 +67,11 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(this.rotation, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.5 * scale, 1 * scale, 0.5 * scale);
-        this.texture.apply();
+        this.black.apply();
         this.balloon.display();
+        this.scene.translate(0, 0.1, 0.8);
+        this.scene.scale(0.5, 0.4, 0.4);
+        this.board.display();
         this.scene.popMatrix();
     }
 
