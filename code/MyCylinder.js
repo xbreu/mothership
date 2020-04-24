@@ -32,10 +32,10 @@ class MyCylinder extends CGFobject {
             ang += alphaAng;
         }
 
-        this.vertices.push(0, 0.5, 0);
-        this.normals.push(0, 0.5, 0);
-        this.vertices.push(0, -0.5, 0);
-        this.normals.push(0, -0.5, 0);
+        this.vertices.push(0, 0.7, 0);
+        this.normals.push(0, 0.7, 0);
+        this.vertices.push(0, -0.7, 0);
+        this.normals.push(0, -0.7, 0);
 
         for (let i = 0; i < this.slices; i++) {
             this.indices.push(2 * i, 2 * i + 2, this.vertices.length / 3 - 2);

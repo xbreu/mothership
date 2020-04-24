@@ -75,10 +75,10 @@ class MyVehicle extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.rotation, 0, 1, 0);
-        this.scene.rotate(Math.PI / 2-0.1, 1, 0, 0);
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.5 * scale, 1 * scale, 0.5 * scale);
-        this.scene.translate(0, 0.45, 1);
-        this.scene.scale(0.2, 0.3, 0.2);
+        this.scene.translate(0, 0.2, 0.9);
+        this.scene.scale(0.15, 0.3, 0.2);
         this.black.apply();
         this.board.display();
         this.scene.popMatrix();
