@@ -41,11 +41,10 @@ class MyScene extends CGFscene {
         this.earthTexture.setTextureWrap('REPEAT', 'REPEAT');
 
         //Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayCylinder = false;
         this.displaySphere = false;
         this.displayNormals = false;
-        this.nightMode = false;
 
         this.selectedMapTexture = 0;
         this.textureIds = {'Day': 0, 'Night': 1};
