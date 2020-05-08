@@ -1,5 +1,5 @@
 class MyPropeller extends CGFobject {
-    constructor(scene, slices, ratio = 2.5, minValue = 0.2) {
+    constructor(scene, slices, ratio = 2.5, minValue = 0.05) {
         super(scene);
         this.center = new MyUnitCircle(scene, slices);
         this.rotation = 0;
