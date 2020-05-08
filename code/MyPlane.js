@@ -33,8 +33,8 @@ class MyPlane extends CGFobject {
         for (var i = 0; i <= this.nDivs; i++) {
             this.vertices.push(xCoord, 0.5, 0);
             this.vertices.push(xCoord, 0.5 - this.patchLength, 0);
-            this.texCoords.push(xCoord, 0);
-            this.texCoords.push(xCoord, 1);
+            this.texCoords.push(i, 0);
+            this.texCoords.push(i, 1);
             xCoord += this.patchLength;
         }
 
