@@ -40,7 +40,7 @@ class MyScene extends CGFscene {
         this.displayCylinder = false;
         this.displaySphere = false;
         this.displayNormals = false;
-        this.displayTerrain = true;
+        this.displayTerrain = false;
         this.nightMode = false;
 
         this.selectedMapTexture = 0;
@@ -57,7 +57,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 2, -15), vec3.fromValues(0, 0, 0));
     }
 
     initTextures() {
@@ -155,7 +155,6 @@ class MyScene extends CGFscene {
         let terrainScale = 50;
         if (this.displayTerrain) {
             this.pushMatrix();
-            this.translate(0, -terrainScale / 2 + 0.1, 0);
             this.rotate(Math.PI / 2, 1, 0, 0);
             this.rotate(Math.PI, 0, 1, 0);
             this.scale(terrainScale, terrainScale, 1);
