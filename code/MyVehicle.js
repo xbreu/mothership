@@ -13,6 +13,9 @@ class MyVehicle extends CGFobject {
         this.board = new MyCylinder(scene, 6);
         this.texture = this.initTexture("zeppelin");
         this.black = this.initColor(33, 17, 19);
+
+        this.Rudders = [new MyPentagon(scene), new MyPentagon(scene), new MyPentagon(scene), new MyPentagon(scene)];
+        this.propeller = new MyPropeller(scene, 20);
     }
 
     reset() {
@@ -49,6 +52,7 @@ class MyVehicle extends CGFobject {
     update(factor) {
         this.z += Math.cos(this.rotation) * this.speed * factor;
         this.x += Math.sin(this.rotation) * this.speed * factor;
+        this.propeller.update(factor);
     }
 
     turn(val) {
@@ -63,8 +67,11 @@ class MyVehicle extends CGFobject {
 
     display(scale) {
         this.scene.pushMatrix();
+
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.rotation, 0, 1, 0);
+
+        this.scene.pushMatrix();
         this.scene.rotate(-3 * Math.PI / 8, 0, 0, 1);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.5 * scale, 1.5 * scale, 0.5 * scale);
@@ -72,15 +79,49 @@ class MyVehicle extends CGFobject {
         this.balloon.display();
         this.scene.popMatrix();
 
+
         this.scene.pushMatrix();
-        this.scene.translate(this.x, this.y, this.z);
-        this.scene.rotate(this.rotation, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.scene.scale(0.5 * scale, 1 * scale, 0.5 * scale);
         this.scene.translate(0, 0.2, 0.9);
         this.scene.scale(0.15, 0.3, 0.2);
         this.black.apply();
         this.board.display();
+        this.scene.popMatrix();
+
+
+        this.scene.pushMatrix();
+        this.scene.scale(0.2 * scale, 0.2 * scale, 0.2 * scale);
+
+        this.scene.pushMatrix();
+        this.scene.translate(1, 0, -6);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.Rudders[0].display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(-1, 0, -6);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+        this.Rudders[1].display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, 1, -6);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.Rudders[2].display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, -1, -6);
+        this.scene.rotate(Math.PI / 2, 0, 1, 0);
+        this.scene.rotate(Math.PI, 1, 0, 0);
+        this.Rudders[3].display();
+        this.scene.popMatrix();
+        this.scene.popMatrix();
+
+        this.propeller.display();
         this.scene.popMatrix();
     }
 
