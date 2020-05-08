@@ -36,11 +36,11 @@ class MyScene extends CGFscene {
         this.initTextures();
 
         //Objects connected to MyInterface
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayCylinder = false;
         this.displaySphere = false;
         this.displayNormals = false;
-        this.displayTerrain = true;
+        this.displayTerrain = false;
         this.nightMode = false;
 
         this.selectedMapTexture = 0;
@@ -139,7 +139,10 @@ class MyScene extends CGFscene {
 
         //This sphere does not have defined texture coordinates
 
+        this.pushMatrix();
+        //this.translate(0, 10, 0);
         this.vehicle.display(this.scaleFactor);
+        this.popMatrix();
 
         if (this.displayCylinder) {
             this.earthTexture.apply();
@@ -155,7 +158,6 @@ class MyScene extends CGFscene {
         let terrainScale = 50;
         if (this.displayTerrain) {
             this.pushMatrix();
-            this.translate(0, -terrainScale / 2 + 0.1, 0);
             this.rotate(Math.PI / 2, 1, 0, 0);
             this.rotate(Math.PI, 0, 1, 0);
             this.scale(terrainScale, terrainScale, 1);
