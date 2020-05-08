@@ -40,7 +40,7 @@ class MyScene extends CGFscene {
         this.displayCylinder = false;
         this.displaySphere = false;
         this.displayNormals = false;
-        this.displayTerrain = true;
+        this.displayTerrain = false;
         this.nightMode = false;
 
         this.selectedMapTexture = 0;
@@ -163,7 +163,6 @@ class MyScene extends CGFscene {
         if (this.displayNormals)
             this.cylinder.enableNormalViz();
 
-        this.scale(10, 10, 10);
         let terrainScale = 50;
         if (this.displayTerrain) {
             this.pushMatrix();
