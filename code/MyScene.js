@@ -150,7 +150,7 @@ class MyScene extends CGFscene {
 
         //This sphere does not have defined texture coordinates
 
-        //this.vehicle.display(this.scaleFactor);
+        this.vehicle.display(this.scaleFactor);
 
         if (this.displayCylinder) {
             this.earthTexture.apply();
