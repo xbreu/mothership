@@ -17,8 +17,8 @@ void main() {
 	//vec2 aux = mod((vTextureCoord+vec2(timeFactor*0.01,timeFactor*0.01)), vec2(1.0, 1.0));
 	vec4 filter = texture2D(uSampler2, vTextureCoord);
 
-	vec3 offset = aVertexNormal*normScale*vec3(0.0, 0.0, filter.b)*0.005;
+	vec3 offset = vec3(0.0, 0.0, filter.b);
 
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset * 8.0, 1.0);
 }
 
