@@ -31,6 +31,8 @@ class MyScene extends CGFscene {
         this.cubemap = new MyUnitCubeQuad(this);
         this.vehicle = new MyVehicle(this);
 
+        this.circle = new MyUnitCircle(this,20);
+
         //Initialize textures
         this.earthTexture = new CGFappearance(this);
         this.earthTexture.setAmbient(0.1, 0.1, 0.1, 1);
@@ -138,6 +140,8 @@ class MyScene extends CGFscene {
         //This sphere does not have defined texture coordinates
 
         this.vehicle.display(this.scaleFactor);
+
+        this.circle.display();
 
         if (this.displayCylinder) {
             this.earthTexture.apply();
