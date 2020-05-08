@@ -166,9 +166,8 @@ class MyScene extends CGFscene {
         this.scale(10, 10, 10);
         let terrainScale = 50;
         if (this.displayTerrain) {
-            this.terrainTexture.apply();
             this.pushMatrix();
-            this.translate(0, -terrainScale / 2 + 0.1, 0);
+            this.translate(0, -terrainScale / 2 + 0.1 + 15, 0);
             this.rotate(Math.PI / 2, 1, 0, 0);
             this.rotate(Math.PI, 0, 1, 0);
             this.scale(terrainScale, terrainScale, 1);
