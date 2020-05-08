@@ -14,8 +14,8 @@ class MyPropeller extends CGFobject {
 
     accelerate(val) {
         this.speed += val;
-        if (this.speed < minValue)
-            this.speed = minValue;
+        if (this.speed < this.minValue)
+            this.speed = this.minValue;
     }
 
     display() {
