@@ -63,6 +63,7 @@ class MyVehicle extends CGFobject {
         this.speed += val;
         if (this.speed < 0)
             this.speed = 0;
+        this.propeller.accelerate(val);
     }
 
     display(scale) {
@@ -119,9 +120,24 @@ class MyVehicle extends CGFobject {
         this.scene.rotate(Math.PI, 1, 0, 0);
         this.Rudders[3].display();
         this.scene.popMatrix();
+
+        for (let i = -1; i <= 1; i += 2) {
+            this.scene.pushMatrix();
+            this.scene.translate(i * 1.5, -2.5, 0);
+            this.scene.scale(0.1, 0.1, 0.1);
+            this.scene.rotate(Math.PI / 2, 1, 0, 0);
+            this.propeller.display();
+            this.scene.popMatrix();
+        }
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, -2.5, -4.5);
+        this.scene.scale(0.1, 0.1, 0.1);
+        this.scene.rotate(Math.PI / 2, 1, 0, 0);
+        this.propeller.display();
         this.scene.popMatrix();
 
-        this.propeller.display();
+        this.scene.popMatrix();
         this.scene.popMatrix();
     }
 
