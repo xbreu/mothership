@@ -8,14 +8,13 @@ class MyVehicle extends CGFobject {
     constructor(scene) {
         super(scene);
         this.reset();
-        this.pyramid = new MyPyramid(scene, 4, 1);
-        this.balloon = new MySphere(scene, 16, 8);
+        this.balloon = new MySphere(scene, 12, 6);
         this.board = new MyCylinder(scene, 6);
         this.texture = this.initTexture("zeppelin");
         this.black = this.initColor(33, 17, 19);
 
         this.Rudders = [new MyPentagon(scene), new MyPentagon(scene), new MyPentagon(scene), new MyPentagon(scene)];
-        this.propeller = new MyPropeller(scene, 20);
+        this.propeller = new MyPropeller(scene, 6);
     }
 
     reset() {
@@ -69,7 +68,6 @@ class MyVehicle extends CGFobject {
 
     display(scale) {
         this.scene.pushMatrix();
-
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.rotation, 0, 1, 0);
 
