@@ -49,10 +49,11 @@ class MyVehicle extends CGFobject {
         return aux;
     }
 
-    update(factor) {
+    update(factor, turn = 0) {
         this.z += Math.cos(this.rotation) * this.speed * factor;
         this.x += Math.sin(this.rotation) * this.speed * factor;
         this.propeller.update(factor);
+        this.turning = turn;
     }
 
     turn(val) {
@@ -110,12 +111,14 @@ class MyVehicle extends CGFobject {
 
         this.scene.pushMatrix();
         this.scene.translate(0, 1, -6);
+        this.scene.rotate(this.turning * Math.PI / 15, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.Rudders[2].display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0, -1, -6);
+        this.scene.rotate(this.turning * Math.PI / 15, 0, 1, 0);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
         this.scene.rotate(Math.PI, 1, 0, 0);
         this.Rudders[3].display();
