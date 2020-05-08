@@ -28,10 +28,13 @@ class MyPlane extends CGFobject {
 
         // Generate vertices
         this.vertices = [];
+        this.texCoords = [];
         var xCoord = -0.5;
         for (var i = 0; i <= this.nDivs; i++) {
             this.vertices.push(xCoord, 0.5, 0);
             this.vertices.push(xCoord, 0.5 - this.patchLength, 0);
+            this.texCoords.push(xCoord, 0);
+            this.texCoords.push(xCoord, 1);
             xCoord += this.patchLength;
         }
 
