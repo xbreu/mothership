@@ -7,10 +7,8 @@ const SupplyStates = {
 class MySupply extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.state = SupplyStates.INACTIVE;
-        this.velocity = 0;
+        this.reset();
         this.initFaces();
-        this.initTexture();
     }
 
     initFaces() {
@@ -20,23 +18,13 @@ class MySupply extends CGFobject {
         this.back = new MyQuad(this.scene);
         this.right = new MyQuad(this.scene);
         this.left = new MyQuad(this.scene);
-        this.texRight = this.initTexture("right");
-        this.texLeft = this.initTexture("left");
-        this.texFront = this.initTexture("front");
-        this.texBack = this.initTexture("back");
-        this.texTop = this.initTexture("top");
-        this.texBottom = this.initTexture("bottom");
-    }
-
-    initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
-        let texture = new CGFappearance(this.scene);
-        texture.setAmbient(10.0, 10.0, 10.0, 1);
-        texture.setDiffuse(0.0, 0.0, 0.0, 1);
-        texture.setSpecular(0.0, 0.0, 0.0, 1);
-        texture.setShininess(1.0);
-        texture.loadTexture('images/split_box/night-' + image + '.png');
-        texture.setTextureWrap(wrap1, wrap2);
-        return texture;
+        this.texture = new CGFappearance(this.scene);
+        this.texture.setAmbient(10.0, 10.0, 10.0, 1);
+        this.texture.setDiffuse(0.0, 0.0, 0.0, 1);
+        this.texture.setSpecular(0.0, 0.0, 0.0, 1);
+        this.texture.setShininess(1.0);
+        this.texture.loadTexture('images/box.jpg');
+        this.texture.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     displayShape(shape, color) {
@@ -54,14 +42,22 @@ class MySupply extends CGFobject {
         this.z = z;
     }
 
+    reset() {
+        this.state = SupplyStates.INACTIVE;
+        this.velocity = 0;
+    }
+
+    land() {
+        this.y = 0;
+        this.state = SupplyStates.LANDED;
+    }
+
     update() {
         if (this.state === SupplyStates.FALLING) {
-            this.velocity += 0.1;
+            this.velocity += 0.01;
             this.y -= this.velocity;
-            if (this.y <= 0) {
-                this.y = 0;
-                this.state = SupplyStates.LANDED;
-            }
+            if (this.y <= 0)
+                this.land();
         }
     }
 
@@ -75,31 +71,31 @@ class MySupply extends CGFobject {
         this.scene.pushMatrix();
         this.scene.translate(0, 0.5, 0);
         this.scene.rotate(-Math.PI / 2, 1, 0, 0);
-        this.displayShape(this.top, this.texTop);
+        this.displayShape(this.top, this.texture);
 
         this.scene.pushMatrix();
         this.scene.translate(0, -0.5, 0);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
-        this.displayShape(this.bottom, this.texBottom);
+        this.displayShape(this.bottom, this.texture);
 
         this.scene.pushMatrix();
         this.scene.translate(0.5, 0, 0);
         this.scene.rotate(Math.PI / 2, 0, 1, 0);
-        this.displayShape(this.right, this.texRight);
+        this.displayShape(this.right, this.texture);
 
         this.scene.pushMatrix();
         this.scene.translate(-0.5, 0, 0);
         this.scene.rotate(-Math.PI / 2, 0, 1, 0);
-        this.displayShape(this.left, this.texLeft);
+        this.displayShape(this.left, this.texture);
 
         this.scene.pushMatrix();
         this.scene.translate(0, 0, 0.5);
-        this.displayShape(this.front, this.texFront);
+        this.displayShape(this.front, this.texture);
 
         this.scene.pushMatrix();
         this.scene.translate(0, 0, -0.5);
         this.scene.rotate(Math.PI, 0, 1, 0);
-        this.displayShape(this.back, this.texBack);
+        this.displayShape(this.back, this.texture);
 
         this.scene.popMatrix();
     }
