@@ -57,7 +57,7 @@ class MyScene extends CGFscene {
     }
 
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 2, -15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(-20, 20, -20), vec3.fromValues(0, 10, 0));
     }
 
     initTextures() {
@@ -108,6 +108,9 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyR")) {
             this.vehicle.reset();
+        }
+        if (this.gui.isKeyPressed("KeyL")) {
+            this.vehicle.drop();
         }
         return turning;
     }
