@@ -12,7 +12,7 @@ class MyVehicle extends CGFobject {
         this.board = new MyCylinder(scene, 6);
         this.texture = this.initTexture("zeppelin");
         this.black = this.initColor(33, 17, 19);
-
+        this.supplies = new MySupply(scene);
         this.Rudders = [new MyPentagon(scene), new MyPentagon(scene), new MyPentagon(scene), new MyPentagon(scene)];
         this.propeller = new MyPropeller(scene, 6);
     }
@@ -136,6 +136,11 @@ class MyVehicle extends CGFobject {
         this.scene.scale(0.1, 0.1, 0.1);
         this.scene.rotate(Math.PI / 2, 1, 0, 0);
         this.propeller.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0, -2.5, -2.5);
+        this.supplies.display();
         this.scene.popMatrix();
 
         this.scene.popMatrix();
