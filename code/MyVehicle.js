@@ -19,7 +19,7 @@ class MyVehicle extends CGFobject {
 
     reset() {
         this.x = 0;
-        this.y = 0;
+        this.y = 10;
         this.z = 0;
         this.rotation = 0;
         this.speed = 0;
@@ -52,7 +52,12 @@ class MyVehicle extends CGFobject {
         this.z += Math.cos(this.rotation) * this.speed * factor;
         this.x += Math.sin(this.rotation) * this.speed * factor;
         this.propeller.update(factor);
+        this.supplies.update();
         this.turning = turn;
+    }
+
+    drop() {
+        this.supplies.drop(this.x, this.y, this.z);
     }
 
     turn(val) {
@@ -138,13 +143,11 @@ class MyVehicle extends CGFobject {
         this.propeller.display();
         this.scene.popMatrix();
 
-        this.scene.pushMatrix();
-        this.scene.translate(0, -2.5, -2.5);
-        this.supplies.display();
         this.scene.popMatrix();
 
         this.scene.popMatrix();
-        this.scene.popMatrix();
+
+        this.supplies.display(scale);
     }
 
 
