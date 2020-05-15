@@ -23,6 +23,7 @@ class MyVehicle extends CGFobject {
         this.z = 0;
         this.rotation = 0;
         this.speed = 0;
+        this.automatic = false;
     }
 
     initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
@@ -48,18 +49,46 @@ class MyVehicle extends CGFobject {
         return aux;
     }
 
-    update(factor, turn = 0) {
-        this.z += Math.cos(this.rotation) * this.speed * factor;
-        this.x += Math.sin(this.rotation) * this.speed * factor;
-        this.propeller.update(factor);
-        this.turning = turn;
+    update(factor, turn = 0, t) {
+        if (this.automatic)
+        {
+            this.autoPilot((t - this.time) / 1000);
+            this.time = t;
+        }
+        else {
+            this.z += Math.cos(this.rotation) * this.speed * factor;
+            this.x += Math.sin(this.rotation) * this.speed * factor;
+            this.propeller.update(factor);
+            this.turning = turn;
+        }
+    }
+
+    toggleAutoPilot(t) {
+        this.automatic = !this.automatic;
+        if (this.automatic) {
+            this.rotationPoint = [this.x + 5 * Math.cos(this.rotation), this.z - 5 * Math.sin(this.rotation)];
+            this.turning = -1;
+            this.time = t;
+        } else {
+            this.turning = 0;
+        }
+    }
+
+    autoPilot(deltaTime) {
+        this.x = this.rotationPoint[0] - 5 * Math.cos(this.rotation);
+        this.z = this.rotationPoint[1] + 5 * Math.sin(this.rotation);
+        this.rotation += (Math.PI*2/5)*deltaTime ;
     }
 
     turn(val) {
-        this.rotation += val;
+        if (!this.automatic)
+            this.rotation += val;
     }
 
     accelerate(val) {
+        if (this.automatic)
+            return;
+
         this.speed += val;
         if (this.speed < 0)
             this.speed = 0;
@@ -139,6 +168,7 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.popMatrix();
+
         this.scene.popMatrix();
     }
 
