@@ -49,9 +49,12 @@ class MyVehicle extends CGFobject {
         return aux;
     }
 
-    update(factor, turn = 0) {
+    update(factor, turn = 0, t) {
         if (this.automatic)
-            this.autoPilot();
+        {
+            this.autoPilot((t - this.time) / 1000);
+            this.time = t;
+        }
         else {
             this.z += Math.cos(this.rotation) * this.speed * factor;
             this.x += Math.sin(this.rotation) * this.speed * factor;
@@ -60,21 +63,21 @@ class MyVehicle extends CGFobject {
         }
     }
 
-    toggleAutoPilot() {
+    toggleAutoPilot(t) {
         this.automatic = !this.automatic;
         if (this.automatic) {
             this.rotationPoint = [this.x + 5 * Math.cos(this.rotation), this.z - 5 * Math.sin(this.rotation)];
             this.turning = -1;
+            this.time = t;
         } else {
-            this.speed = 0;
             this.turning = 0;
         }
     }
 
-    autoPilot() {
+    autoPilot(deltaTime) {
         this.x = this.rotationPoint[0] - 5 * Math.cos(this.rotation);
         this.z = this.rotationPoint[1] + 5 * Math.sin(this.rotation);
-        this.rotation += 0.1;
+        this.rotation += (Math.PI*2/5)*deltaTime ;
     }
 
     turn(val) {
