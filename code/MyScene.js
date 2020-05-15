@@ -90,7 +90,7 @@ class MyScene extends CGFscene {
         this.cubemap.setNightMode(this.selectedMapTexture == 1);
     }
 
-    checkKeys() {
+    checkKeys(t) {
         let turning = 0;
         if (this.gui.isKeyPressed("KeyW")) {
             this.vehicle.accelerate(0.01);
@@ -111,14 +111,17 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyL")) {
             this.vehicle.drop();
+        if(this.gui.isKeyPressed("KeyP"))
+        {
+            this.vehicle.toggleAutoPilot(t);
         }
         return turning;
     }
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t) {
-        let res = this.checkKeys();
-        this.vehicle.update(this.speedFactor, res);
+        let res = this.checkKeys(t);
+        this.vehicle.update(this.speedFactor, res, t);
     }
 
     display() {

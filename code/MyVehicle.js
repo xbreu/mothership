@@ -31,6 +31,7 @@ class MyVehicle extends CGFobject {
             this.supplies[i].reset();
         this.rotation = 0;
         this.speed = 0;
+        this.automatic = false;
     }
 
     initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
@@ -55,14 +56,38 @@ class MyVehicle extends CGFobject {
         aux.setShininess(1.0);
         return aux;
     }
-
-    update(factor, turn = 0) {
-        this.z += Math.cos(this.rotation) * this.speed * factor;
-        this.x += Math.sin(this.rotation) * this.speed * factor;
-        this.propeller.update(factor);
-        for (let i = 0; i < supplyNumber; i++)
+  
+    update(factor, turn = 0, t) {
+        if (this.automatic)
+        {
+            this.autoPilot((t - this.time) / 1000);
+            this.time = t;
+        }
+        else {
+            this.z += Math.cos(this.rotation) * this.speed * factor;
+            this.x += Math.sin(this.rotation) * this.speed * factor;
+            this.propeller.update(factor);
+            for (let i = 0; i < supplyNumber; i++)
             this.supplies[i].update();
         this.turning = turn;
+        }
+    }
+
+    toggleAutoPilot(t) {
+        this.automatic = !this.automatic;
+        if (this.automatic) {
+            this.rotationPoint = [this.x + 5 * Math.cos(this.rotation), this.z - 5 * Math.sin(this.rotation)];
+            this.turning = -1;
+            this.time = t;
+        } else {
+            this.turning = 0;
+        }
+    }
+
+    autoPilot(deltaTime) {
+        this.x = this.rotationPoint[0] - 5 * Math.cos(this.rotation);
+        this.z = this.rotationPoint[1] + 5 * Math.sin(this.rotation);
+        this.rotation += (Math.PI*2/5)*deltaTime ;
     }
 
     drop() {
@@ -74,10 +99,14 @@ class MyVehicle extends CGFobject {
     }
 
     turn(val) {
-        this.rotation += val;
+        if (!this.automatic)
+            this.rotation += val;
     }
 
     accelerate(val) {
+        if (this.automatic)
+            return;
+
         this.speed += val;
         if (this.speed < 0)
             this.speed = 0;
