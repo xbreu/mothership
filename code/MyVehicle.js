@@ -56,21 +56,19 @@ class MyVehicle extends CGFobject {
         aux.setShininess(1.0);
         return aux;
     }
-  
+
     update(factor, turn = 0, t) {
-        if (this.automatic)
-        {
+        if (this.automatic) {
             this.autoPilot((t - this.time) / 1000);
             this.time = t;
-        }
-        else {
+        } else {
             this.z += Math.cos(this.rotation) * this.speed * factor;
             this.x += Math.sin(this.rotation) * this.speed * factor;
             this.propeller.update(factor);
-            for (let i = 0; i < supplyNumber; i++)
-            this.supplies[i].update();
-        this.turning = turn;
+            this.turning = turn;
         }
+        for (let i = 0; i < supplyNumber; i++)
+            this.supplies[i].update();
     }
 
     toggleAutoPilot(t) {
@@ -87,7 +85,7 @@ class MyVehicle extends CGFobject {
     autoPilot(deltaTime) {
         this.x = this.rotationPoint[0] - 5 * Math.cos(this.rotation);
         this.z = this.rotationPoint[1] + 5 * Math.sin(this.rotation);
-        this.rotation += (Math.PI*2/5)*deltaTime ;
+        this.rotation += (Math.PI * 2 / 5) * deltaTime;
     }
 
     drop() {
