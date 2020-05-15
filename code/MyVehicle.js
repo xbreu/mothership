@@ -3,24 +3,32 @@
  * @constructor
  * @param scene - Reference to MyScene object
  */
+
+const supplyNumber = 5;
+
 class MyVehicle extends CGFobject {
 
     constructor(scene) {
         super(scene);
-        this.reset();
         this.balloon = new MySphere(scene, 12, 6);
         this.board = new MyCylinder(scene, 6);
         this.texture = this.initTexture("zeppelin");
         this.black = this.initColor(33, 17, 19);
-
+        this.supplies = [];
+        for (let i = 0; i < supplyNumber; i++)
+            this.supplies.push(new MySupply(scene));
         this.Rudders = [new MyPentagon(scene), new MyPentagon(scene), new MyPentagon(scene), new MyPentagon(scene)];
         this.propeller = new MyPropeller(scene, 6);
+
+        this.reset();
     }
 
     reset() {
         this.x = 0;
-        this.y = 0;
+        this.y = 10;
         this.z = 0;
+        for (let i = 0; i < supplyNumber; i++)
+            this.supplies[i].reset();
         this.rotation = 0;
         this.speed = 0;
         this.automatic = false;
@@ -48,7 +56,7 @@ class MyVehicle extends CGFobject {
         aux.setShininess(1.0);
         return aux;
     }
-
+  
     update(factor, turn = 0, t) {
         if (this.automatic)
         {
@@ -59,7 +67,9 @@ class MyVehicle extends CGFobject {
             this.z += Math.cos(this.rotation) * this.speed * factor;
             this.x += Math.sin(this.rotation) * this.speed * factor;
             this.propeller.update(factor);
-            this.turning = turn;
+            for (let i = 0; i < supplyNumber; i++)
+            this.supplies[i].update();
+        this.turning = turn;
         }
     }
 
@@ -78,6 +88,14 @@ class MyVehicle extends CGFobject {
         this.x = this.rotationPoint[0] - 5 * Math.cos(this.rotation);
         this.z = this.rotationPoint[1] + 5 * Math.sin(this.rotation);
         this.rotation += (Math.PI*2/5)*deltaTime ;
+    }
+
+    drop() {
+        for (let i = 0; i < supplyNumber; i++)
+            if (this.supplies[i].state === SupplyStates.INACTIVE) {
+                this.supplies[i].drop(this.x, this.y, this.z);
+                break;
+            }
     }
 
     turn(val) {
@@ -170,6 +188,9 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.popMatrix();
+
+        for (let i = 0; i < supplyNumber; i++)
+            this.supplies[i].display(scale);
     }
 
 
