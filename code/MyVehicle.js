@@ -50,10 +50,9 @@ class MyVehicle extends CGFobject {
     }
 
     update(factor, turn = 0) {
-        if(this.automatic)
+        if (this.automatic)
             this.autoPilot();
-        else
-        {
+        else {
             this.z += Math.cos(this.rotation) * this.speed * factor;
             this.x += Math.sin(this.rotation) * this.speed * factor;
             this.propeller.update(factor);
@@ -61,44 +60,26 @@ class MyVehicle extends CGFobject {
         }
     }
 
-    toggleAutoPilot()
-    {
+    toggleAutoPilot() {
         this.automatic = !this.automatic;
-        if(this.automatic)
-        {
-            this.rotationPoint = [this.x + 5, this.z];
+        if (this.automatic) {
+            this.rotationPoint = [this.x + 5 * Math.cos(this.rotation), this.z + 5 * Math.sin(this.rotation)];
         }
     }
 
-    autoPilot()
-    {
-        console.log(this.x + " ,  "+ this.z);
-        this.x = this.x - this.rotationPoint[0];
-        this.z = this.z - this.rotationPoint[1];
-
-        console.log(this.x + " ,  "+ this.z);
-
-        let rot = Math.PI*2 / 5;
-
-        this.rotation += 0.2;
-        this.z += Math.cos(this.rotation);
-        this.x += Math.sin(this.rotation);
-
-        this.propeller.update(5);
-        this.turning = -1;
-
-        this.x += this.rotationPoint[0];
-        this.z += this.rotationPoint[1];
-
+    autoPilot() {
+        this.x = this.rotationPoint[0] - 5 * Math.cos(this.rotation);
+        this.z = this.rotationPoint[1] + 5 * Math.sin(this.rotation);
+        this.rotation += 0.1;
     }
 
     turn(val) {
-        if(!this.automatic)
-           this.rotation += val;
+        if (!this.automatic)
+            this.rotation += val;
     }
 
     accelerate(val) {
-        if(this.automatic)
+        if (this.automatic)
             return;
 
         this.speed += val;
