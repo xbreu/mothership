@@ -63,7 +63,11 @@ class MyVehicle extends CGFobject {
     toggleAutoPilot() {
         this.automatic = !this.automatic;
         if (this.automatic) {
-            this.rotationPoint = [this.x + 5 * Math.cos(this.rotation), this.z + 5 * Math.sin(this.rotation)];
+            this.rotationPoint = [this.x + 5 * Math.cos(this.rotation), this.z - 5 * Math.sin(this.rotation)];
+            this.turning = -1;
+        } else {
+            this.speed = 0;
+            this.turning = 0;
         }
     }
 
