@@ -23,6 +23,7 @@ class MyVehicle extends CGFobject {
         this.z = 0;
         this.rotation = 0;
         this.speed = 0;
+        this.automatic = false;
     }
 
     initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
@@ -49,17 +50,57 @@ class MyVehicle extends CGFobject {
     }
 
     update(factor, turn = 0) {
-        this.z += Math.cos(this.rotation) * this.speed * factor;
-        this.x += Math.sin(this.rotation) * this.speed * factor;
-        this.propeller.update(factor);
-        this.turning = turn;
+        if(this.automatic)
+            this.autoPilot();
+        else
+        {
+            this.z += Math.cos(this.rotation) * this.speed * factor;
+            this.x += Math.sin(this.rotation) * this.speed * factor;
+            this.propeller.update(factor);
+            this.turning = turn;
+        }
+    }
+
+    toggleAutoPilot()
+    {
+        this.automatic = !this.automatic;
+        if(this.automatic)
+        {
+            this.rotationPoint = [this.x + 5, this.z];
+        }
+    }
+
+    autoPilot()
+    {
+        console.log(this.x + " ,  "+ this.z);
+        this.x = this.x - this.rotationPoint[0];
+        this.z = this.z - this.rotationPoint[1];
+
+        console.log(this.x + " ,  "+ this.z);
+
+        let rot = Math.PI*2 / 5;
+
+        this.rotation += 0.2;
+        this.z += Math.cos(this.rotation);
+        this.x += Math.sin(this.rotation);
+
+        this.propeller.update(5);
+        this.turning = -1;
+
+        this.x += this.rotationPoint[0];
+        this.z += this.rotationPoint[1];
+
     }
 
     turn(val) {
-        this.rotation += val;
+        if(!this.automatic)
+           this.rotation += val;
     }
 
     accelerate(val) {
+        if(this.automatic)
+            return;
+
         this.speed += val;
         if (this.speed < 0)
             this.speed = 0;
@@ -139,6 +180,7 @@ class MyVehicle extends CGFobject {
         this.scene.popMatrix();
 
         this.scene.popMatrix();
+
         this.scene.popMatrix();
     }
 

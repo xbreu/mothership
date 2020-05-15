@@ -109,6 +109,10 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")) {
             this.vehicle.reset();
         }
+        if(this.gui.isKeyPressed("KeyP"))
+        {
+            this.vehicle.toggleAutoPilot();
+        }
         return turning;
     }
 
