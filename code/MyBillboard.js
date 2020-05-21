@@ -1,6 +1,14 @@
 class MyBillboard extends CGFobject {
     constructor(scene) {
         super(scene);
-        this.n = 0;
+        this.nSuppliesDelivered = 0;
+    }
+
+    incrementSupplies() {
+        this.nSuppliesDelivered++;
+    }
+
+    decrementSupplies() {
+        this.nSuppliesDelivered--;
     }
 }
