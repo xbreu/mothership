@@ -16,12 +16,12 @@ class MyBillboard extends CGFobject {
         this.black.setShininess(1.0);
     }
 
-    incrementSupplies() {
-        this.nSuppliesDelivered++;
+    resetSupplies() {
+        this.nSuppliesDelivered = 0;
     }
 
-    decrementSupplies() {
-        this.nSuppliesDelivered--;
+    incrementSupplies() {
+        this.nSuppliesDelivered++;
     }
 
     display(scale) {
