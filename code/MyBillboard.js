@@ -27,7 +27,7 @@ class MyBillboard extends CGFobject {
     display(scale) {
         this.scene.pushMatrix();
         this.gray.apply();
-        this.scene.translate(0, 10, 0);
+        this.scene.translate(0, 1.5, 5);
 
         this.scene.pushMatrix();
         this.scene.scale(2 * scale, scale, scale);
