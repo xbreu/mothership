@@ -31,6 +31,7 @@ class MyScene extends CGFscene {
         this.cubemap = new MyUnitCubeQuad(this);
         this.vehicle = new MyVehicle(this);
         this.terrain = new MyTerrain(this);
+        this.billboard = new MyBillboard(this);
 
         //Initialize textures
         this.initTextures();
@@ -147,7 +148,8 @@ class MyScene extends CGFscene {
 
         this.pushMatrix();
         //this.translate(0, 10, 0);
-        this.vehicle.display(this.scaleFactor);
+        //this.vehicle.display(this.scaleFactor);
+        this.billboard.display(this.scaleFactor);
         this.popMatrix();
 
         if (this.displayCylinder) {
