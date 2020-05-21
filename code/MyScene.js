@@ -109,9 +109,11 @@ class MyScene extends CGFscene {
         }
         if (this.gui.isKeyPressed("KeyR")) {
             this.vehicle.reset();
+            this.billboard.resetSupplies();
         }
         if (this.gui.isKeyPressed("KeyL")) {
             this.vehicle.drop();
+            this.billboard.incrementSupplies();
         }
         if (this.gui.isKeyPressed("KeyP")) {
             this.vehicle.toggleAutoPilot(t);
