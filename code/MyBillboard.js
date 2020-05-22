@@ -15,8 +15,21 @@ class MyBillboard extends CGFobject {
         this.black.setSpecular(0.0, 0.0, 0.0, 1);
         this.black.setShininess(1.0);
 
+        this.texture = this.initTexture("billboard");
+
         this.progressShader = new CGFshader(this.scene.gl, "shaders/billboard.vert", "shaders/billboard.frag");
         this.progressShader.setUniformsValues({uSampler2: 1});
+    }
+
+    initTexture(image, wrap1 = 'REPEAT', wrap2 = wrap1) {
+        let texture = new CGFappearance(this.scene);
+        texture.setAmbient(10.0, 10.0, 10.0, 1);
+        texture.setDiffuse(0.0, 0.0, 0.0, 1);
+        texture.setSpecular(0.0, 0.0, 0.0, 1);
+        texture.setShininess(1.0);
+        texture.loadTexture('images/' + image + '.png');
+        texture.setTextureWrap(wrap1, wrap2);
+        return texture;
     }
 
     resetSupplies() {
@@ -29,13 +42,13 @@ class MyBillboard extends CGFobject {
 
     display(scale) {
         this.scene.pushMatrix();
-        this.gray.apply();
+        this.texture.apply();
         this.scene.translate(0, 1.5, 5);
 
         this.scene.pushMatrix();
         this.scene.scale(2 * scale, scale, scale);
         this.board.display();
-        this.scene.scale(1, -1, 1);
+        this.scene.scale(-1, 1, 1);
         this.board.display();
         this.scene.popMatrix();
 
