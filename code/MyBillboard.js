@@ -4,11 +4,13 @@ class MyBillboard extends CGFobject {
         this.nSuppliesDelivered = 0;
         this.support = new MyQuad(scene);
         this.board = new MyQuad(scene);
+
         this.gray = new CGFappearance(this.scene);
         this.gray.setAmbient(5 * 0.8, 5 * 0.8, 5 * 0.8, 1.0);
         this.gray.setDiffuse(0.0, 0.0, 0.0, 1);
         this.gray.setSpecular(0.0, 0.0, 0.0, 1);
         this.gray.setShininess(1.0);
+
         this.black = new CGFappearance(this.scene);
         this.black.setAmbient(5 * 0.2, 5 * 0.2, 5 * 0.2, 1.0);
         this.black.setDiffuse(0.0, 0.0, 0.0, 1);
@@ -43,12 +45,12 @@ class MyBillboard extends CGFobject {
     display(scale) {
         this.scene.pushMatrix();
         this.texture.apply();
-        this.scene.translate(0, 1.5, 5);
+        this.scene.translate(0, 5 + 1.5, 5);
 
         this.scene.pushMatrix();
         this.scene.scale(2 * scale, scale, scale);
         this.board.display();
-        this.scene.scale(-1, 1, 1);
+        this.scene.rotate(Math.PI, 0, 1, 0);
         this.board.display();
         this.scene.popMatrix();
 
