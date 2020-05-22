@@ -5,7 +5,7 @@ class MyBillboard extends CGFobject {
         this.support = new MyQuad(scene);
         this.board = new MyQuad(scene);
         this.gray = new CGFappearance(this.scene);
-        this.gray.setAmbient(5 * 0.5, 5 * 0.5, 5 * 0.5, 1.0);
+        this.gray.setAmbient(5 * 0.8, 5 * 0.8, 5 * 0.8, 1.0);
         this.gray.setDiffuse(0.0, 0.0, 0.0, 1);
         this.gray.setSpecular(0.0, 0.0, 0.0, 1);
         this.gray.setShininess(1.0);
@@ -52,6 +52,7 @@ class MyBillboard extends CGFobject {
         }
 
         this.progressShader.setUniformsValues({normScale: this.scaleFactor});
+        this.progressShader.setUniformsValues({nSuppliesDelivered: this.nSuppliesDelivered});
         this.scene.setActiveShader(this.progressShader);
         this.black.apply();
         this.scene.pushMatrix();
