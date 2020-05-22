@@ -5,11 +5,7 @@ class MyBillboard extends CGFobject {
         this.support = new MyQuad(scene);
         this.board = new MyQuad(scene);
 
-        this.gray = new CGFappearance(this.scene);
-        this.gray.setAmbient(5 * 0.8, 5 * 0.8, 5 * 0.8, 1.0);
-        this.gray.setDiffuse(0.0, 0.0, 0.0, 1);
-        this.gray.setSpecular(0.0, 0.0, 0.0, 1);
-        this.gray.setShininess(1.0);
+        this.text = this.initTexture("billboard-text");
 
         this.black = new CGFappearance(this.scene);
         this.black.setAmbient(5 * 0.2, 5 * 0.2, 5 * 0.2, 1.0);
@@ -29,7 +25,7 @@ class MyBillboard extends CGFobject {
         texture.setDiffuse(0.0, 0.0, 0.0, 1);
         texture.setSpecular(0.0, 0.0, 0.0, 1);
         texture.setShininess(1.0);
-        texture.loadTexture('images/' + image + '.png');
+        texture.loadTexture('images/' + image + '.jpg');
         texture.setTextureWrap(wrap1, wrap2);
         return texture;
     }
@@ -44,13 +40,14 @@ class MyBillboard extends CGFobject {
 
     display(scale) {
         this.scene.pushMatrix();
-        this.texture.apply();
         this.scene.translate(0, 5 + 1.5, 5);
 
         this.scene.pushMatrix();
         this.scene.scale(2 * scale, scale, scale);
+        this.text.apply();
         this.board.display();
         this.scene.rotate(Math.PI, 0, 1, 0);
+        this.texture.apply();
         this.board.display();
         this.scene.popMatrix();
 
@@ -69,7 +66,6 @@ class MyBillboard extends CGFobject {
         this.progressShader.setUniformsValues({normScale: this.scaleFactor});
         this.progressShader.setUniformsValues({nSuppliesDelivered: this.nSuppliesDelivered});
         this.scene.setActiveShader(this.progressShader);
-        this.black.apply();
         this.scene.pushMatrix();
         this.scene.scale(1.5 * scale, 0.2 * scale, scale);
         this.scene.translate(0, -1, -0.001);
