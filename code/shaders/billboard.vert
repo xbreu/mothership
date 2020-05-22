@@ -9,6 +9,7 @@ uniform mat4 uNMatrix;
 
 varying vec2 vTextureCoord;
 varying vec3 vVertexPosition;
+uniform float nSuppliesDelivered;
 uniform sampler2D uSampler2;
 uniform float normScale;
 
