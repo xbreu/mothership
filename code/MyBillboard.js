@@ -14,6 +14,9 @@ class MyBillboard extends CGFobject {
         this.black.setDiffuse(0.0, 0.0, 0.0, 1);
         this.black.setSpecular(0.0, 0.0, 0.0, 1);
         this.black.setShininess(1.0);
+
+        this.progressShader = new CGFshader(this.scene.gl, "shaders/billboard.vert", "shaders/billboard.frag");
+        this.progressShader.setUniformsValues({uSampler2: 1});
     }
 
     resetSupplies() {
@@ -48,6 +51,8 @@ class MyBillboard extends CGFobject {
             }
         }
 
+        this.progressShader.setUniformsValues({normScale: this.scaleFactor});
+        this.scene.setActiveShader(this.progressShader);
         this.black.apply();
         this.scene.pushMatrix();
         this.scene.scale(1.5 * scale, 0.2 * scale, scale);
